@@ -1,0 +1,20 @@
+def minimumLoss(price):
+    indexed = [(p, i) for i, p in enumerate(price)]
+    indexed.sort()
+
+    ans = float('inf')
+
+    for i in range(1, len(indexed)):
+        lower_price, lower_year = indexed[i - 1]
+        higher_price, higher_year = indexed[i]
+
+        if higher_year < lower_year:
+            ans = min(ans, higher_price - lower_price)
+
+    return ans
+
+
+n = int(input())
+price = list(map(int, input().split()))
+
+print(minimumLoss(price))
